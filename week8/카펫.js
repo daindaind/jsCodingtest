@@ -1,20 +1,11 @@
 function solution(brown, yellow) {
-  let row = 0;
-  let column = 0;
+  for (let i = 1; i <= Math.sqrt(yellow); i++) {
+    if (yellow % i === 0) {
+      const j = yellow / i;
 
-  for (let i = 1; i <= yellow; i++) {
-    // 가로
-    for (let j = yellow; j >= 1; j--) {
-      // 세로
-      if (i * j === yellow) {
-        if ((i + 2) * (j + 2) - yellow === brown) {
-          row = i + 2;
-          column = j + 2;
-          break;
-        }
+      if ((i + 2) * (j + 2) - yellow === brown) {
+        return [j + 2, i + 2];
       }
     }
   }
-
-  return [row, column];
 }
