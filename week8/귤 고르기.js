@@ -1,23 +1,18 @@
 function solution(k, tangerine) {
-  let dic = [];
-  new Set(tangerine).forEach((item) => {
-    dic.push({
-      name: item,
-      count: 0,
-    });
+  const countMap = new Map();
+
+  tangerine.forEach((size) => {
+    countMap.set(size, (countMap.get(size) || 0) + 1);
   });
 
-  dic.forEach((dicItem) => {
-    const list = tangerine.filter((item) => item === dicItem.name);
-    dicItem.count = list.length;
-  });
+  const sortedCounts = Array.from(countMap.values()).sort((a, b) => b - a);
 
-  // dic의 결과
-  // [
-  //   { name: 1, count: 1 },
-  //   { name: 3, count: 2 },
-  //   { name: 2, count: 2 },
-  //   { name: 5, count: 2 },
-  //   { name: 4, count: 1 }
-  // ]
+  let count = 0;
+  for (let freq of sortedCounts) {
+    k -= freq;
+    count++;
+    if (k <= 0) break;
+  }
+
+  return count;
 }
