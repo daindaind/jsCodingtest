@@ -1,15 +1,15 @@
 function solution(elements) {
-  let result = [];
-  for (let index = 1; index <= elements.length; index++) {
-    let answer = [];
-    for (let i = 0; i < elements.length; i++) {
-      let resultNum = elements[(i + index) % elements.length];
-      answer.push(elements[i] + resultNum);
+  let answer = 0;
+  let set = new Set();
+  for (let i = 1; i <= elements.length; i++) {
+    for (let j = 0; j < elements.length; j++) {
+      let sum = 0;
+      for (let k = j; k < j + i; k++) {
+        sum += elements[k % elements.length];
+      }
+      set.add(sum);
     }
-    console.log(answer);
-    result.push(...answer);
   }
-
-  const setResult = new Set(result);
-  return [...setResult].length;
+  answer = set.size;
+  return answer;
 }
