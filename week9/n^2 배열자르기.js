@@ -1,22 +1,11 @@
 function solution(n, left, right) {
-  let list = [];
-  let arr = [];
+  const result = [];
 
-  for (let i = 1; i <= n; i++) {
-    let row = [];
-    for (let j = 1; j <= n; j++) {
-      if (i < j) {
-        row.push(j);
-      } else {
-        row.push(i);
-      }
-    }
-    list.push(row);
+  for (let idx = left; idx <= right; idx++) {
+    const i = Math.floor(idx / n);
+    const j = idx % n;
+    result.push(Math.max(i, j) + 1);
   }
 
-  list.forEach((item) => {
-    arr.push(...item);
-  });
-
-  return arr.slice(left, right + 1);
+  return result;
 }
