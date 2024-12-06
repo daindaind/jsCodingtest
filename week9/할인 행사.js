@@ -1,24 +1,16 @@
 function solution(want, number, discount) {
-  let days = 1;
-  let count = 0;
-  let startIndex = 0;
-  while (startIndex < 5) {
-    for (let i = 0; i < discount.length; i++) {
-      if (days === 10) {
-        break;
+  let answer = 0;
+  for (let i = 0; i < discount.length - 9; i++) {
+    let j;
+    for (j = 0; j < want.length; j++) {
+      let check = 0;
+      for (let k = i; k < i + 10; k++) {
+        if (discount[k] === want[j]) check++;
       }
-      const find = want.find((wantItem) => discount[i] === wantItem);
-      if (find) {
-        number[want.indexOf(discount[i])] =
-          number[want.indexOf(discount[i])] - 1;
-      }
-      days += 1;
+      if (check < number[j]) break;
     }
-    if (number.reduce((acc, sum) => (sum += acc), 0) === 0) {
-      count += 1;
-    }
-    startIndex += 1;
+    if (j === want.length) answer++;
   }
 
-  console.log(number);
+  return answer;
 }
